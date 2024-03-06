@@ -1,6 +1,19 @@
+import Link from "next/link";
+
 import api from "@/api";
 
-export default async function RestaurantPage({ id }) {
+
+export async function generateMetadata({params: {id}}) {
+  const restaurant = await api.fetch(id);
+
+  return {
+    title: `${restaurant.name} - Restaurancy`,
+    description: restaurant.description,
+  };
+}
+
+
+export default async function RestaurantPage({params: {id} }) {
   const restaurant = await api.fetch(id);
 
   return (
@@ -11,7 +24,7 @@ export default async function RestaurantPage({ id }) {
         src={restaurant.image}
       />
       <h2 className="inline-flex gap-2 text-lg font-bold">
-        <span>{restaurant.name}</span>
+        <Link href='/'>{restaurant.name}</Link>
         <small className="inline-flex gap-1">
           <span>⭐</span>
           <span>{restaurant.score}</span>
