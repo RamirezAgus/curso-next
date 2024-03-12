@@ -127,7 +127,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const api = {
   list: async () => {
     const [, ...data] = await fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQSkGlk27OhfbKSYNd9QNYNuvfISZj4HVzZYZHcjUljsPQfTdJt1h1v0YaaUoGQF-Sv45JMRuW3yLle/pub?output=csv"
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQSkGlk27OhfbKSYNd9QNYNuvfISZj4HVzZYZHcjUljsPQfTdJt1h1v0YaaUoGQF-Sv45JMRuW3yLle/pub?output=csv",
     )
       .then((res) => res.text())
       .then((text) => text.split("\n"));
