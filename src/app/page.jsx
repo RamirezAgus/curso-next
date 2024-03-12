@@ -1,14 +1,17 @@
 import Link from "next/link";
 
 import api from "@/api"
+import SearchBox from "./components/SearchBox";
 
-export default async function HomePage() {
-  const restaurants = await api.list();
+export default async function HomePage({ searchParams }) {
+  const restaurants = await api.search(searchParams.q);
 
   console.log(restaurants);
 
   return (
-    <section className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+    <section>
+      <SearchBox />
+      <section className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
       {restaurants.map((restaurant) => {
         return (
           <article key={restaurant.id}>
@@ -18,7 +21,7 @@ export default async function HomePage() {
               src={restaurant.image}
             />
             <h2 className="inline-flex gap-2 text-lg font-bold">
-              <Link href={`/${restaurant.id}`}>{restaurant.name}</Link>
+              <Link href={`/${restaurant.id}`} prefetch={false}>{restaurant.name}</Link>
               <small className="inline-flex gap-1">
                 <span>⭐</span>
                 <span>{restaurant.score}</span>
@@ -29,6 +32,7 @@ export default async function HomePage() {
           </article>
         );
       })}
+    </section>
     </section>
   )
 }

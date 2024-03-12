@@ -32,7 +32,7 @@ export default async function RestaurantPage({params: {id} }) {
         src={restaurant.image}
       />
       <h2 className="inline-flex gap-2 text-lg font-bold">
-        <Link href='/' prefetch={false}>{restaurant.name}</Link>
+        <Link href='/'>{restaurant.name}</Link>
         <small className="inline-flex gap-1">
           <span>⭐</span>
           <span>{restaurant.score}</span>
